@@ -95,7 +95,8 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form>
+        <form action="{{route('login')}}" method="post">
+            @csrf
             <div class="input-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
