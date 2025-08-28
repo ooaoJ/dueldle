@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('cards', function (Blueprint $table) {
        $table->id();
             $table->char('name',255);
-            $table->enum('card_type',['monster','spell','trap']);
-            $table->enum('attribute',['water','fire','light','earth','darkness','wind','divine']);
+            $table->enum('card_type',['Monster','Spell','Trap']);
+            $table->enum('attribute',['Water','Fire','Light','Earth','Darkness','Wind','Divine']);
             $table->integer('level');
-            $table->longText('description');//descricao de monstro
-            $table->longText('effect');//efeito de monstro ou magia ou de armadilha
+            $table->longText('description');
+            $table->longText('effect')->nullable();
             $table->char('image',255);
-            $table->enum('tipe_efect',['Normal Spell','Quick-Play Spell','Continuous Spell','Equip Spell','Field Spell','Ritual Spell','Normal Trap','Continuous Trap','Counter Trap']);
+            $table->enum('tipe_efect',['Normal Spell','Quick-Play Spell','Continuous Spell','Equip Spell','Field Spell','Ritual Spell','Normal Trap','Continuous Trap','Counter Trap'])->nullable();
             $table->integer('atk');
             $table->integer('def');
-            $table->enum('tipe_monster',['monster','fusion','synchro','xyz','link']);
+            $table->enum('tipe_monster',['Monster','Fusion','Synchro','XYZ','Link']);
             $table->timestamps();
         });
     }
