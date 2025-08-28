@@ -84,7 +84,8 @@
         </div>
         <nav class="header-nav">
             <ul>
-                <li><a href="{{route('cards.index')}}">Cards</a></li>
+                <li><a href="{{route('cards.index')}}">Cards CRUD</a></li>
+                <li><a href="{{route('view.cards')}}">Cards View</a></li>
                 <li><a href="#">Personagens</a></li>
                 <li><a href="#">Falas</a></li>
             </ul>

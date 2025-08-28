@@ -49,6 +49,11 @@ class CardController extends Controller
             ->with('success', 'Card created successfully.');
     }
 
+    public function view_cards(){
+        $cards = Card::all();
+
+        return view('card.view',compact('cards'));       
+    }
     /**
      * Display the specified resource.
      */

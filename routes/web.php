@@ -12,3 +12,5 @@ Route::resource('cards', CardController::class)->middleware('auth');
 Route::get('/home',function(){
     return view('admin.home');
 })->name('home')->middleware('auth');
+
+Route::get('/view/cards',[CardController::class,'view_cards'])->name('view.cards')->middleware('auth');
