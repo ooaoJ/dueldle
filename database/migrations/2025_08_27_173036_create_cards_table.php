@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
        $table->id();
-            $table->char('name',255);
+            $table->string('name',255);
             $table->enum('card_type',['Monster','Spell','Trap']);
             $table->enum('attribute',['Water','Fire','Light','Earth','Darkness','Wind','Divine']);
             $table->integer('level');
             $table->longText('description');
             $table->longText('effect')->nullable();
-            $table->char('image',255);
+            $table->string('image',255);
             $table->enum('tipe_efect',['Normal Spell','Quick-Play Spell','Continuous Spell','Equip Spell','Field Spell','Ritual Spell','Normal Trap','Continuous Trap','Counter Trap'])->nullable();
-            $table->integer('atk');
-            $table->integer('def');
+            $table->integer('atk')->nullable();
+            $table->integer('def')->nullable();
             $table->enum('tipe_monster',['Monster','Fusion','Synchro','XYZ','Link']);
             $table->timestamps();
         });
