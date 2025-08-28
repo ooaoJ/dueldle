@@ -1,6 +1,6 @@
 <div class="row padding-1 p-1">
     <div class="col-md-12">
-        
+
         <div class="form-group mb-2 mb20">
             <label for="name" class="form-label">{{ __('Name') }}</label>
             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $card?->name) }}" id="name" placeholder="Name">
@@ -8,7 +8,14 @@
         </div>
         <div class="form-group mb-2 mb20">
             <label for="card_type" class="form-label">{{ __('Card Type') }}</label>
-            <input type="text" name="card_type" class="form-control @error('card_type') is-invalid @enderror" value="{{ old('card_type', $card?->card_type) }}" id="card_type" placeholder="Card Type">
+            <select class="form-control " name="card_type" id="card_type">
+
+                <option value="monster">Monster</option>
+                <option value="spell">Spell</option>
+                <option value="trap">Trap</option>
+
+
+            </select>
             {!! $errors->first('card_type', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
@@ -33,12 +40,22 @@
         </div>
         <div class="form-group mb-2 mb20">
             <label for="image" class="form-label">{{ __('Image') }}</label>
-            <input type="text" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image', $card?->image) }}" id="image" placeholder="Image">
+            <input type="file" name="image" class="form-control" placeholder="Image">
             {!! $errors->first('image', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
             <label for="tipe_efect" class="form-label">{{ __('Tipe Efect') }}</label>
-            <input type="text" name="tipe_efect" class="form-control @error('tipe_efect') is-invalid @enderror" value="{{ old('tipe_efect', $card?->tipe_efect) }}" id="tipe_efect" placeholder="Tipe Efect">
+            <label for="tipe_efect" class="form-label">{{ __('Tipe Efect') }}</label>
+            <select class="form-control " name="tipe_efect" id="tipe_efect">
+                <option value="Normal Spell">Normal Spell</option>
+                <option value="Quick-Play Spell">Quick-Play Spell</option>
+                <option value="Continuous Spell">Continuous Spell</option>
+                <option value="Continuous Spell">Equip Spell</option>
+                <option value="Continuous Spell">Field Spell</option>
+                <option value="Continuous Spell">Ritual Spell</option>
+                <option value="Continuous Spell">Continuous Trap</option>
+                <option value="Continuous Spell">Counter Trap</option>
+            </select>
             {!! $errors->first('tipe_efect', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
@@ -53,7 +70,16 @@
         </div>
         <div class="form-group mb-2 mb20">
             <label for="tipe_monster" class="form-label">{{ __('Tipe Monster') }}</label>
-            <input type="text" name="tipe_monster" class="form-control @error('tipe_monster') is-invalid @enderror" value="{{ old('tipe_monster', $card?->tipe_monster) }}" id="tipe_monster" placeholder="Tipe Monster">
+
+            <label for="tipe_monster" class="form-label">{{ __('Tipe Monster') }}</label>
+            <select class="form-control " name="tipe_monster" id="tipe_monster">
+                <option value="monster">Monster</option>
+                <option value="xyz">X-Y-Z</option>
+                <option value="link">Link</option>
+                <option value="fusion">Fusion</option>
+                <option value="synchro">Synchro</option>
+            </select>
+
             {!! $errors->first('tipe_monster', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
