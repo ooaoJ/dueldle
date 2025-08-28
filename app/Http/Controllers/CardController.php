@@ -77,9 +77,26 @@ class CardController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CardRequest $request, Card $card): RedirectResponse
+    public function update(Request $request, Card $card): RedirectResponse
     {
-        $card->update($request->validated());
+        $validated = $request->validate(Card::update_rule());
+
+        if($request->hasFile('image')){
+
+        
+        $image = $request->file('image');
+
+        $name = time() . '_' . $image->getClientOriginalName();
+
+        $image->move(public_path('uploads'),$name);
+        
+        $validated['image'] = $name;
+
+        }else{
+            $validated['image'] = $card->image;
+        }
+        
+        $card->update($validated);
 
         return Redirect::route('cards.index')
             ->with('success', 'Card updated successfully');
