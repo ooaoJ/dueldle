@@ -22,17 +22,17 @@ class CardRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'name' => '',
-			'card_type' => 'in:monster,spell,trap',
-			'attribute' => 'in:water,fire,light,earth,darkness,wind,divine',
-			'level' => '',
-			'description' => '',
-			'effect' => '',
-			'image' => 'required',
-			'tipe_efect' => 'in:Normal Spell,Quick-Play Spell,Continuous Spell,Equip Spell,Field Spell,Ritual Spell,Normal Trap,Continuous Trap,Counter Trap',
-			'atk' => '',
-			'def' => '',
-			'tipe_monster' => 'in:monster,fusion,link,xyz,synchro',
+            'name' => 'required|string|max:255',
+            'card_type' => 'required|in:Monster,Spell,Trap',
+            'attribute' => 'nullable|in:Water,Fire,Light,Earth,Darkness,Wind,Divine',
+            'level' => 'nullable|integer|min:1|max:12',
+            'description' => 'required|string',
+            'effect' => 'nullable|string',
+            'image' => 'required|image|max:2048',
+            'tipe_efect' => 'nullable|in:Normal Spell,Quick-Play Spell,Continuous Spell,Equip Spell,Field Spell,Ritual Spell,Normal Trap,Continuous Trap,Counter Trap',
+            'atk' => 'nullable|integer|min:0',
+            'def' => 'nullable|integer|min:0',
+            'tipe_monster' => 'nullable|in:Monster,Fusion,Synchro,XYZ,Link',
         ];
     }
 }
