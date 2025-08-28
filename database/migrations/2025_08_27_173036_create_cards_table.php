@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('card_type',['Monster','Spell','Trap']);
             $table->enum('attribute',['Water','Fire','Light','Earth','Darkness','Wind','Divine']);
             $table->integer('level');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->longText('effect')->nullable();
             $table->string('image',255);
             $table->enum('tipe_efect',['Normal Spell','Quick-Play Spell','Continuous Spell','Equip Spell','Field Spell','Ritual Spell','Normal Trap','Continuous Trap','Counter Trap'])->nullable();
@@ -36,3 +36,5 @@ return new class extends Migration
         Schema::dropIfExists('cards');
     }
 };
+
+// $2y$12$q7eCkZCEIlYy1HTnI71Un.kHDhauqeWtgRde.B5HINPiJZ4gp6Jba

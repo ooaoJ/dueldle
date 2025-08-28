@@ -26,7 +26,7 @@ class CardRequest extends FormRequest
             'card_type' => 'required|in:Monster,Spell,Trap',
             'attribute' => 'nullable|in:Water,Fire,Light,Earth,Darkness,Wind,Divine',
             'level' => 'nullable|integer|min:1|max:12',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'effect' => 'nullable|string',
             'image' => 'required|image|max:2048',
             'tipe_efect' => 'nullable|in:Normal Spell,Quick-Play Spell,Continuous Spell,Equip Spell,Field Spell,Ritual Spell,Normal Trap,Continuous Trap,Counter Trap',
