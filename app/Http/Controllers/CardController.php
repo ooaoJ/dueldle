@@ -37,7 +37,13 @@ class CardController extends Controller
      */
     public function store(CardRequest $request): RedirectResponse
     {
-        Card::create($request->validated());
+        $image = $request->file('image');
+
+        $name = time() . '_' . $image->getClientOriginalName();
+
+        $image->move(public_path('uploads'),$name);
+
+        Card::create(array_merge($request->validated(),['image'=>$name]));
 
         return Redirect::route('cards.index')
             ->with('success', 'Card created successfully.');
