@@ -42,9 +42,20 @@ class Card extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function deckCards()
-    {
-        return $this->hasMany(\App\Models\DeckCard::class, 'id', 'card_id');
-    }
-    
+
+    public static function update_rule(){
+        return [
+            'name' => 'required|string|max:255',
+            'card_type' => 'required|in:Monster,Spell,Trap',
+            'attribute' => 'nullable|in:Water,Fire,Light,Earth,Darkness,Wind,Divine',
+            'level' => 'nullable|integer|min:1|max:12',
+            'description' => 'nullable|string',
+            'effect' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
+            'tipe_efect' => 'nullable|in:Normal Spell,Quick-Play Spell,Continuous Spell,Equip Spell,Field Spell,Ritual Spell,Normal Trap,Continuous Trap,Counter Trap',
+            'atk' => 'nullable|integer|min:0',
+            'def' => 'nullable|integer|min:0',
+            'tipe_monster' => 'nullable|in:Monster,Fusion,Synchro,XYZ,Link',
+        ];
+    } 
 }
