@@ -59,8 +59,10 @@
                             </ul>
 
                             <div class="mt-3">
-                                <h6>{{ __('Description') }}</h6>
-                                <p class="mb-2">{{ $card->description }}</p>
+                                @if ($card->description)
+                                    <h6>{{ __('Description') }}</h6>
+                                    <p class="mb-2">{{ $card->description }}</p>
+                                @endif
 
                                 @if($card->effect)
                                     <h6>{{ __('Effect') }}</h6>
