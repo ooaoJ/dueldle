@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('personagens', function (Blueprint $table) {
             $table->id();
+            $table->char('name',255);
+            $table->char('gender',255);
+            $table->integer('age');
+            $table->char('appear',255);
+            $table->string('deck_type')->nullable();
+            $table->foreignId('favorite_card')->constrained('cards');//pista
+            $table->char('image',255);
             $table->timestamps();
         });
     }
