@@ -84,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $cards->withQueryString()->links() !!}
+                {!! $cards->withQueryString()->links('pagination::bootstrap-5') !!}
             </div>
         </div>
     </div>
