@@ -74,13 +74,19 @@
             line-height: 1.6;
             color: #666;
         }
+        .card-animation {
+            transition: transform 1s;
+        }
+        .card-animation:hover {
+            transform: rotate(2deg);
+        }
     </style>
 </head>
 <body>
 
     <header class="header">
         <div class="header-logo">
-            DUELDLE ADMIN
+            <img src="{{asset('dueldle-admin.png')}}" alt="Logo Dueldle" width="300px">
         </div>
         <nav class="header-nav">
             <ul>

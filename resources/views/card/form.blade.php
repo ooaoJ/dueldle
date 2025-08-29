@@ -1,97 +1,140 @@
-<div class="row padding-1 p-1">
-    <div class="col-md-12">
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card shadow-sm rounded-3">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Informações Básicas</h5>
 
-        <div class="form-group mb-2 mb20">
-            <label for="name" class="form-label">{{ __('Name') }}</label>
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $card?->name) }}" id="name" placeholder="Name">
-            {!! $errors->first('name', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="card_type" class="form-label">{{ __('Card Type') }}</label>
-            <select class="form-control " name="card_type" id="card_type">
-                <option value="Monster">Monster</option>
-                <option value="Spell">Spell</option>
-                <option value="Trap">Trap</option>
-            </select>
-            {!! $errors->first('card_type', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="attribute" class="form-label">{{ __('Attribute') }}</label>
-            <select class="form-control " name="attribute" id="attribute">
-                <option value="Water">Water</option>
-                <option value="Fire">Fire</option>
-                <option value="Light">Light</option>
-                <option value="Earth">Earth</option>
-                <option value="Darkness">Darkness</option>
-                <option value="Wind">Wind</option>
-                <option value="Divine">Divine</option>
-            </select>
-            {!! $errors->first('attribute', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label fw-bold">Name</label>
+                    <input type="text" name="name" id="name" 
+                        class="form-control @error('name') is-invalid @enderror"
+                        value="{{ old('name', $card?->name) }}" placeholder="Card Name">
+                    {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
 
-        <div class="form-group mb-2 mb20">
-            <label for="level" class="form-label">{{ __('Level') }}</label>
-            <input type="number" name="level" class="form-control @error('level') is-invalid @enderror" value="{{ old('level', $card?->level) }}" id="level" placeholder="Level" min="1" max="12">
-            {!! $errors->first('level', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="description" class="form-label">{{ __('Description') }}</label>
-            <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description', $card?->description) }}" id="description" placeholder="Description">
-            {!! $errors->first('description', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="effect" class="form-label">{{ __('Effect') }}</label>
-            <input type="text" name="effect" class="form-control @error('effect') is-invalid @enderror" value="{{ old('effect', $card?->effect) }}" id="effect" placeholder="Effect">
-            {!! $errors->first('effect', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="image" class="form-label">{{ __('Image') }}</label>
-            <input type="file" name="image" class="form-control" placeholder="Image">
-            {!! $errors->first('image', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="tipe_efect" class="form-label">{{ __('Tipe Efect') }}</label>
-            <select class="form-control " name="tipe_efect" id="tipe_efect">
-                <option value="">Don't have</option>
-                <option value="Normal Spell">Normal Spell</option>
-                <option value="Quick-Play Spell">Quick-Play Spell</option>
-                <option value="Continuous Spell">Continuous Spell</option>
-                <option value="Equip Spell">Equip Spell</option>
-                <option value="Field Spell">Field Spell</option>
-                <option value="Ritual Spell">Ritual Spell</option>
-                <option value="Normal Trap">Normal Trap</option>
-                <option value="Continuous Trap">Continuous Trap</option>
-                <option value="Counter Trap">Counter Trap</option>
-            </select>
-            {!! $errors->first('tipe_efect', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="atk" class="form-label">{{ __('Atk') }}</label>
-            <input type="number" name="atk" class="form-control @error('atk') is-invalid @enderror" value="{{ old('atk', $card?->atk) }}" id="atk" placeholder="Atk">
-            {!! $errors->first('atk', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="def" class="form-label">{{ __('Def') }}</label>
-            <input type="number" name="def" class="form-control @error('def') is-invalid @enderror" value="{{ old('def', $card?->def) }}" id="def" placeholder="Def">
-            {!! $errors->first('def', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="tipe_monster" class="form-label">{{ __('Tipe Monster') }}</label>
+                <div class="mb-3">
+                    <label for="card_type" class="form-label fw-bold">Card Type</label>
+                    <select name="card_type" id="card_type" class="form-select">
+                        <option value="">-- Select --</option>
+                        <option value="Monster">Monster</option>
+                        <option value="Spell">Spell</option>
+                        <option value="Trap">Trap</option>
+                    </select>
+                </div>
 
-            <label for="tipe_monster" class="form-label">{{ __('Tipe Monster') }}</label>
-            <select class="form-control " name="tipe_monster" id="tipe_monster">
-                <option value="Monster">Monster</option>
-                <option value="XYZ">X-Y-Z</option>
-                <option value="Link">Link</option>
-                <option value="Fusion">Fusion</option>
-                <option value="Synchro">Synchro</option>
-            </select>
+                <div class="mb-3">
+                    <label for="attribute" class="form-label fw-bold">Attribute</label>
+                    <select name="attribute" id="attribute" class="form-select">
+                        <option value="">--</option>
+                        <option>Water</option>
+                        <option>Fire</option>
+                        <option>Light</option>
+                        <option>Earth</option>
+                        <option>Darkness</option>
+                        <option>Wind</option>
+                        <option>Divine</option>
+                    </select>
+                </div>
 
-            {!! $errors->first('tipe_monster', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+                <div class="mb-3">
+                    <label for="level" class="form-label fw-bold">Level</label>
+                    <input type="number" name="level" id="level"
+                        class="form-control" min="1" max="12"
+                        value="{{ old('level', $card?->level) }}" placeholder="1-12">
+                </div>
+            </div>
         </div>
-
     </div>
-    <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm rounded-3">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Descrição & Efeitos</h5>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-bold">Description</label>
+                    <textarea name="description" id="description" rows="2"
+                        class="form-control">{{ old('description', $card?->description) }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="effect" class="form-label fw-bold">Effect</label>
+                    <textarea name="effect" id="effect" rows="2"
+                        class="form-control">{{ old('effect', $card?->effect) }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tipe_efect" class="form-label fw-bold">Type Effect</label>
+                    <select name="tipe_efect" id="tipe_efect" class="form-select">
+                        <option value="">-</option>
+                        <option>Normal Spell</option>
+                        <option>Quick-Play Spell</option>
+                        <option>Continuous Spell</option>
+                        <option>Equip Spell</option>
+                        <option>Field Spell</option>
+                        <option>Ritual Spell</option>
+                        <option>Normal Trap</option>
+                        <option>Continuous Trap</option>
+                        <option>Counter Trap</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm rounded-3">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Status</h5>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="atk" class="form-label fw-bold">ATK</label>
+                        <input type="number" name="atk" id="atk" class="form-control"
+                            value="{{ old('atk', $card?->atk) }}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="def" class="form-label fw-bold">DEF</label>
+                        <input type="number" name="def" id="def" class="form-control"
+                            value="{{ old('def', $card?->def) }}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="tipe_monster" class="form-label fw-bold">Monster Type</label>
+                    <select name="tipe_monster" id="tipe_monster" class="form-select">
+                        <option value="">-</option>
+                        <option>Monster</option>
+                        <option>XYZ</option>
+                        <option>Link</option>
+                        <option>Fusion</option>
+                        <option>Synchro</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm rounded-3">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Imagem</h5>
+                <div class="mb-3">
+                    <input type="file" name="image" class="form-control">
+                </div>
+                @if(!empty($card?->image))
+                    <div class="text-center">
+                        <img src="{{ asset('storage/'.$card->image) }}" 
+                             class="img-thumbnail shadow-sm" style="max-height:200px">
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 text-end mt-3">
+        <button type="submit" class="btn btn-secondary px-4">
+            <i class="bi bi-check2-circle"></i> Salvar
+        </button>
     </div>
 </div>

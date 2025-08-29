@@ -15,15 +15,15 @@ return new class extends Migration
        $table->id();
             $table->string('name',255);
             $table->enum('card_type',['Monster','Spell','Trap']);
-            $table->enum('attribute',['Water','Fire','Light','Earth','Darkness','Wind','Divine']);
-            $table->integer('level');
+            $table->enum('attribute',['Water','Fire','Light','Earth','Darkness','Wind','Divine'])->nullable();
+            $table->integer('level')->nullable();
             $table->longText('description')->nullable();
             $table->longText('effect')->nullable();
             $table->string('image',255);
             $table->enum('tipe_efect',['Normal Spell','Quick-Play Spell','Continuous Spell','Equip Spell','Field Spell','Ritual Spell','Normal Trap','Continuous Trap','Counter Trap'])->nullable();
             $table->integer('atk')->nullable();
             $table->integer('def')->nullable();
-            $table->enum('tipe_monster',['Monster','Fusion','Synchro','XYZ','Link','Ritual']);
+            $table->enum('tipe_monster',['Monster','Fusion','Synchro','XYZ','Link','Ritual'])->nullable();
             $table->timestamps();
         });
     }
