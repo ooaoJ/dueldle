@@ -79,6 +79,12 @@ class PersonagenController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    public function view_personagens(){
+        $personagens = Personagen::orderBy('name', 'ASC')->get();
+
+        return view('personagen.view',compact('personagens'));       
+    }
+
     public function update(Request $request, Personagen $personagen): RedirectResponse
     {
         $validate = $request->validate([
