@@ -5,79 +5,107 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
 
-                            <span id="card_title">
-                                {{ __('Personagens') }}
-                            </span>
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white rounded-top-4 d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">
+                        <i class="fa fa-users me-2"></i> Personagens
+                    </h4>
+                    <a href="{{ route('personagens.create') }}" class="btn btn-light btn-sm rounded-pill px-3">
+                        <i class="fa fa-plus-circle me-1"></i> Novo Personagem
+                    </a>
+                </div>
 
-                             <div class="float-right">
-                                <a href="{{ route('personagens.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
-                        </div>
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success m-4 shadow-sm rounded-3">
+                        <p class="mb-0">{{ $message }}</p>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success m-4">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+                @endif
 
-                    <div class="card-body bg-white">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
+                <div class="card-body bg-white rounded-bottom-4">
+                    <div class="table-responsive">
+                        <table class="table align-middle table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>Gênero</th>
+                                    <th>Idade</th>
+                                    <th>Aparência</th>
+                                    <th>Deck</th>
+                                    <th>Carta Favorita</th>
+                                    <th>Imagem</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($personagens as $personagen)
                                     <tr>
-                                        <th>No</th>
+                                        <td><span class="badge bg-secondary">{{ ++$i }}</span></td>
+                                        <td><strong>{{ $personagen->name }}</strong></td>
+                                        <td>{{ $personagen->gender }}</td>
+                                        <td><span class="badge bg-info text-dark">{{ $personagen->age }}</span></td>
+                                        <td>{{ Str::limit($personagen->appear, 40) }}</td>
+                                        <td>{{ $personagen->deck_type }}</td>
+                                        <td>
+                                            {{-- Se favorite_card for ID, mostra nome da carta --}}
+                                            @if($personagen->favoriteCard?->name)
+                                                <span class="badge bg-dark text-white">{{ $personagen->favoriteCard->name }}</span>
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($personagen->image)
+                                                <img src="{{ asset('storage/'.$personagen->image) }}" 
+                                                     alt="Imagem" 
+                                                     class="img-thumbnail shadow-sm"
+                                                     style="max-width: 80px; height: auto;">
+                                            @else
+                                                <span class="text-muted">Sem imagem</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('personagens.destroy', $personagen->id) }}" method="POST">
+                                                <div class="btn-group" role="group">
+                                                    <a class="btn btn-sm btn-outline-primary" 
+                                                       href="{{ route('personagens.show', $personagen->id) }}" 
+                                                       title="Ver">
+                                                       <i class="bi bi-eye-fill"></i>
+                                                    </a>
                                         
-									<th >Name</th>
-									<th >Gender</th>
-									<th >Age</th>
-									<th >Appear</th>
-									<th >Deck Type</th>
-									<th >Favorite Card</th>
-									<th >Image</th>
-
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($personagens as $personagen)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-										<td >{{ $personagen->name }}</td>
-										<td >{{ $personagen->gender }}</td>
-										<td >{{ $personagen->age }}</td>
-										<td >{{ $personagen->appear }}</td>
-										<td >{{ $personagen->deck_type }}</td>
-										<td >{{ $personagen->favorite_card }}</td>
-										<td >{{ $personagen->image }}</td>
-
-                                            <td>
-                                                <form action="{{ route('personagens.destroy', $personagen->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('personagens.show', $personagen->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('personagens.edit', $personagen->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-outline-success" 
+                                                       href="{{ route('personagens.edit', $personagen->id) }}" 
+                                                       title="Editar">
+                                                       <i class="bi bi-pencil-fill"></i>
+                                                    </a>
+                                        
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                                    <button type="submit" 
+                                                            class="btn btn-sm btn-outline-danger" 
+                                                            onclick="return confirm('Tem certeza que deseja excluir este personagem?')" 
+                                                            title="Excluir">
+                                                            <i class="bi bi-trash-fill"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                {!! $personagens->withQueryString()->links() !!}
+            </div>
+
+            <div class="mt-3">
+                {!! $personagens->withQueryString()->links('pagination::bootstrap-5') !!}
             </div>
         </div>
     </div>
+</div>
 @endsection
