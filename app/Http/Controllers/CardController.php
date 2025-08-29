@@ -50,7 +50,7 @@ class CardController extends Controller
     }
 
     public function view_cards(){
-        $cards = Card::all();
+        $cards = Card::orderBy('name', 'ASC')->get();
 
         return view('card.view',compact('cards'));       
     }
