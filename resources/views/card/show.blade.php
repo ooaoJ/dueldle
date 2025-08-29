@@ -5,69 +5,74 @@
 @endsection
 
 @section('content')
-    <section class="content container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                        <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Card</span>
+<section class="content container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ __('Show') }} {{ __('Card') }}</h5>
+                    <a class="btn btn-primary btn-sm" href="{{ route('view.cards') }}">{{ __('Back') }}</a>
+                </div>
+                <div class="card-body bg-white">
+                    <div class="row">
+                        <div class="col-md-4 d-flex align-items-start justify-content-center mb-3">
+                            @if($card->image)
+                                <img src="{{ asset('uploads') }}/{{ $card->image }}" alt="{{ $card->name }}" class="img-fluid rounded shadow-sm" style="max-height:420px; width: auto;">
+                            @else
+                                <div class="border rounded d-flex align-items-center justify-content-center" style="height:420px; width:100%;">
+                                    <span class="text-muted">{{ __('No image') }}</span>
+                                </div>
+                            @endif
                         </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('cards.index') }}"> {{ __('Back') }}</a>
+
+                        <div class="col-md-8">
+                            <h3 class="mb-3">{{ $card->name }}</h3>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Card Type</span>
+                                    <span class="badge bg-secondary">{{ $card->card_type }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Attribute</span>
+                                    <span class="badge bg-secondary">{{ $card->attribute }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Level</span>
+                                    <span class="badge bg-secondary">{{ $card->level }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Type Monster</span>
+                                    <span class="badge bg-secondary">{{ $card->tipe_monster }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>ATK / DEF</span>
+                                    <span>
+                                        <span class="badge bg-success me-1">@if($card->atk == null) ? @else {{$card->atk}} @endif</span>
+                                        <span class="badge bg-danger">@if($card->def == null) ? @else {{$card->def}} @endif</span>
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Effect Type</span>
+                                    <span class="badge bg-secondary">{{ $card->tipe_efect }}</span>
+                                </li>
+                            </ul>
+
+                            <div class="mt-3">
+                                <h6>{{ __('Description') }}</h6>
+                                <p class="mb-2">{{ $card->description }}</p>
+
+                                @if($card->effect)
+                                    <h6>{{ __('Effect') }}</h6>
+                                    <p class="mb-0">{{ $card->effect }}</p>
+                                @endif
+                            </div>
+
                         </div>
-                    </div>
-
-                    <div class="card-body bg-white">
-                        
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Name:</strong>
-                                    {{ $card->name }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Card Type:</strong>
-                                    {{ $card->card_type }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Attribute:</strong>
-                                    {{ $card->attribute }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Level:</strong>
-                                    {{ $card->level }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Description:</strong>
-                                    {{ $card->description }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Effect:</strong>
-                                    {{ $card->effect }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Image:</strong>
-                                    {{ $card->image }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Tipe Efect:</strong>
-                                    {{ $card->tipe_efect }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Atk:</strong>
-                                    {{ $card->atk }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Def:</strong>
-                                    {{ $card->def }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Tipe Monster:</strong>
-                                    {{ $card->tipe_monster }}
-                                </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection
