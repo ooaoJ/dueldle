@@ -101,6 +101,7 @@ class PersonagenController extends Controller
             $image = $request->file('image');
             $name = time() . '_' . $image->getClientOriginalName();
 
+            $image->move(public_path('uploads'),$name);
             $validate['image'] = $name;
         }else{
             $validate['image'] = $personagen->image;
