@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\PersonagenController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,3 +15,5 @@ Route::get('/home',function(){
 })->name('home')->middleware('auth');
 
 Route::get('/view/cards',[CardController::class,'view_cards'])->name('view.cards')->middleware('auth');
+
+Route::resource('personagens', PersonagenController::class)->middleware('auth');
