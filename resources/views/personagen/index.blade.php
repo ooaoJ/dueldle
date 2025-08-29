@@ -60,7 +60,7 @@
                                         </td>
                                         <td>
                                             @if($personagen->image)
-                                                <img src="{{ asset('storage/'.$personagen->image) }}" 
+                                                <img src="{{ asset('uploads')}}/{{$personagen->image}}" 
                                                      alt="Imagem" 
                                                      class="img-thumbnail shadow-sm"
                                                      style="max-width: 80px; height: auto;">
