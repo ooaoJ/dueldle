@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\ClassicModeController;
 use App\Http\Controllers\PersonagenController;
 use App\Models\Personagen;
 
@@ -20,3 +21,10 @@ Route::get('/view/cards',[CardController::class,'view_cards'])->name('view.cards
 Route::resource('personagens', PersonagenController::class)->middleware('auth');
 
 Route::get('/view/personagens',[PersonagenController::class,'view_personagens'])->name('view.personagens')->middleware('auth');
+
+Route::get('/classic',function(){
+    $cards = null;
+    return view('game.classic',compact('cards'));
+})->name('classic');
+
+Route::post('/classic/query',[ClassicModeController::class,'query'])->name('classic.query');
