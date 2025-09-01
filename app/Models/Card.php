@@ -36,7 +36,7 @@ class Card extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'card_type', 'attribute', 'level', 'description', 'effect', 'image', 'tipe_efect', 'atk', 'def', 'tipe_monster'];
+    protected $fillable = ['name', 'card_type', 'attribute', 'level','tipe_monster' ,'description', 'effect', 'image', 'tipe_efect', 'atk', 'def', 'tipe_monster_card'];
 
 
     /**
@@ -46,16 +46,17 @@ class Card extends Model
     public static function update_rule(){
         return [
             'name' => 'required|string|max:255',
-            'card_type' => 'required|in:Monster,Spell,Trap',
+            'card_type' => 'nullable|in:Monster,Spell,Trap',
             'attribute' => 'nullable|in:Water,Fire,Light,Earth,Darkness,Wind,Divine',
             'level' => 'nullable|integer|min:1|max:12',
             'description' => 'nullable|string',
             'effect' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
             'tipe_efect' => 'nullable|in:Normal Spell,Quick-Play Spell,Continuous Spell,Equip Spell,Field Spell,Ritual Spell,Normal Trap,Continuous Trap,Counter Trap',
+            'tipe_monster'=>'nullable|string',
             'atk' => 'nullable|integer|min:0',
             'def' => 'nullable|integer|min:0',
-            'tipe_monster' => 'nullable|in:Monster,Fusion,Synchro,XYZ,Link',
+            'tipe_monster_card' => 'nullable|in:Monster,Fusion,Synchro,XYZ,Link',
         ];
     } 
 }

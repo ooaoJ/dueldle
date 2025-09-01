@@ -6,7 +6,7 @@
 
                 <div class="mb-3">
                     <label for="name" class="form-label fw-bold">Name</label>
-                    <input type="text" name="name" id="name" 
+                    <input type="text" name="name" id="name"
                         class="form-control @error('name') is-invalid @enderror"
                         value="{{ old('name', $card?->name) }}" placeholder="Card Name">
                     {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
@@ -42,6 +42,14 @@
                         class="form-control" min="1" max="12"
                         value="{{ old('level', $card?->level) }}" placeholder="1-12">
                 </div>
+
+                <div class="mb-3">
+                    <label for="tipe_monster" class="form-label fw-bold">tipe_monster
+                    </label>
+                    <textarea name="tipe_monster" id="tipe_monster" rows="2"
+                        class="form-control">{{ old('tipe_monster', $card?->tipe_monster) }}</textarea>
+                </div>
+
             </div>
         </div>
     </div>
@@ -101,8 +109,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="tipe_monster" class="form-label fw-bold">Monster Type</label>
-                    <select name="tipe_monster" id="tipe_monster" class="form-select">
+                    <label for="tipe_monster_card" class="form-label fw-bold">Monster Type Card</label>
+                    <select name="tipe_monster_card" id="tipe_monster_card" class="form-select">
                         <option value="">-</option>
                         <option>Monster</option>
                         <option>XYZ</option>
@@ -123,14 +131,15 @@
                     <input type="file" name="image" class="form-control">
                 </div>
                 @if(!empty($card?->image))
-                    <div class="text-center">
-                        <img src="{{ asset('storage/'.$card->image) }}" 
-                             class="img-thumbnail shadow-sm" style="max-height:200px">
-                    </div>
+                <div class="text-center">
+                    <img src="{{ asset('storage/'.$card->image) }}"
+                        class="img-thumbnail shadow-sm" style="max-height:200px">
+                </div>
                 @endif
             </div>
         </div>
     </div>
+
 
     <div class="col-12 text-end mt-3">
         <button type="submit" class="btn btn-secondary px-4">

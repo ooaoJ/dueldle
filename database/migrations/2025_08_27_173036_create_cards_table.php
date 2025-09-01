@@ -23,7 +23,8 @@ return new class extends Migration
             $table->enum('tipe_efect',['Normal Spell','Quick-Play Spell','Continuous Spell','Equip Spell','Field Spell','Ritual Spell','Normal Trap','Continuous Trap','Counter Trap'])->nullable();
             $table->integer('atk')->nullable();
             $table->integer('def')->nullable();
-            $table->enum('tipe_monster',['Monster','Fusion','Synchro','XYZ','Link','Ritual'])->nullable();
+            $table->string('tipe_monster')->nullable();
+            $table->enum('tipe_monster_card',['Monster','Fusion','Synchro','XYZ','Link','Ritual'])->nullable();
             $table->timestamps();
         });
     }

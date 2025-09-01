@@ -96,6 +96,14 @@ class CardController extends Controller
             $validated['image'] = $card->image;
         }
         
+        if($validated['tipe_monster_card'] == null){
+            $validated['tipe_monster_card'] = $card->tipe_monster_card;
+        }
+        
+        if($validated['card_type'] == null){
+            $validated['card_type'] = $card->card_type;
+        }
+        
         $card->update($validated);
 
         return Redirect::route('cards.index')

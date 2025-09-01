@@ -31,8 +31,9 @@ class CardRequest extends FormRequest
             'image' => 'required|image|max:2048',
             'tipe_efect' => 'nullable|in:Normal Spell,Quick-Play Spell,Continuous Spell,Equip Spell,Field Spell,Ritual Spell,Normal Trap,Continuous Trap,Counter Trap',
             'atk' => 'nullable|integer|min:0',
+            'tipe_monster'=>'nullable|string',
             'def' => 'nullable|integer|min:0',
-            'tipe_monster' => 'nullable|in:Monster,Fusion,Synchro,XYZ,Link',
+            'tipe_monster_card' => 'nullable|in:Monster,Fusion,Synchro,XYZ,Link',
         ];
     }
 }

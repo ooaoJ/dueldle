@@ -39,9 +39,10 @@
                                     <th>Effect</th>
                                     <th>Image</th>
                                     <th>Effect Type</th>
+                                    <th>Monster Type</th>
                                     <th>Atk</th>
                                     <th>Def</th>
-                                    <th>Monster Type</th>
+                                    <th>Monster Type Card</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -73,9 +74,10 @@
                                         </td>
 
                                         <td>{{ $card->tipe_efect }}</td>
+                                        <td>{{ $card->tipe_monster }}</td>
                                         <td>{{ $card->atk }}</td>
                                         <td>{{ $card->def }}</td>
-                                        <td>{{ $card->tipe_monster }}</td>
+                                        <td>{{ $card->tipe_monster_card }}</td>
 
                                         <td>
                                             <form action="{{ route('cards.destroy', $card->id) }}" method="POST">
