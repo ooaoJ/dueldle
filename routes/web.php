@@ -27,4 +27,3 @@ Route::get('/classic',function(){
     return view('game.classic',compact('cards'));
 })->name('classic');
 
-Route::post('/classic/query',[ClassicModeController::class,'query'])->name('classic.query');
