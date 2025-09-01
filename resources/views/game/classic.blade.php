@@ -235,12 +235,54 @@
 
         .cell.up-arrow::after {
             border-bottom: 8px solid var(--correct-green);
-            /* Seta para cima */
         }
 
         .cell.down-arrow::after {
             border-top: 8px solid var(--incorrect-red);
-            /* Seta para baixo */
+        }
+
+        .suggestions-box {
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            background: white;
+            top: 90%;
+            left: 0%;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            cursor: pointer;
+            gap: 10px;
+            transition: background 0.2s;
+            border-bottom: 1px solid #eee;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .suggestion-item img {
+            width: 50px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .suggestion-item div {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
         }
     </style>
 </head>
@@ -263,11 +305,13 @@
             <p>Adivinhe a carta de Yu-Gi-Oh! de hoje!</p>
             <form class="guess-form" onsubmit="return false;">
                 <input type="text" class="guess-input" id="input" placeholder="Digite o nome da carta...">
+                <div id="suggestions" class="suggestions-box"></div>
                 <button type="submit" class="submit-button" title="Enviar Palpite"></button>
             </form>
         </main>
 
-        <section class="results-grid">
+
+        <section id="results-grid" class="results-grid">
             <div class="grid-header">
                 <div>Carta</div>
                 <div>Atributo</div>
@@ -276,22 +320,56 @@
                 <div>ATK</div>
                 <div>DEF</div>
             </div>
-            
-            @if($cards)
-            @foreach($cards as $card)
-                    <div class="grid-row incorrect">
-                        <div>{{$card->name}}</div>
-                        <div>{{$card->attribute}}</div>
-                        <div>{{$card->tipe_monster}}</div>
-                        <div class="cell down-arrow">{{$card->level}}</div>
-                        <div class="cell down-arrow">{{$card->atk}}</div>
-                        <div class="cell down-arrow">{{$card->def}}</div>
-                    </div>
-                @endforeach
-            @endif
+
+
+
         </section>
 
     </div>
+
+    <script>
+        async function getQueryCards(data) {
+            const api = await fetch('{{route("classic.query")}}', {
+                'method': 'POST',
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body': JSON.stringify({
+                    name: data
+                })
+            });
+
+            const response = await api.json();
+
+            return response
+        }
+
+        document.getElementById('input').addEventListener('input', function(element) {
+            document.getElementById('suggestions').innerHTML = ''
+            insertData(element.target.value);
+        })
+
+        async function insertData(data) {
+            const dados = await getQueryCards(data);
+
+            dados.forEach(card => {
+                document.getElementById('suggestions').innerHTML += `
+            <div onclick="validateCard()" class="suggestion-item">
+                <div>${card.name}</div>
+                <img src="{{asset('uploads')}}/${card.image}" alt="">
+            </div>
+
+        `;
+            });
+
+            console.log(dados);
+        }
+
+        function validateCard() {
+            document.getElementById('suggestions').innerHTML = ''
+            console.log('clicou')
+        }
+    </script>
 
 </body>
 
