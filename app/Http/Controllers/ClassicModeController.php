@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 class ClassicModeController extends Controller
 {
     public function query(Request $request){
-        $cards = Card::where('name','LIKE','%'.$request->input('name').'%')->get();
+        $cards = Card::where('name','LIKE','%'.$request->input('name').'%')->orderBy('name','ASC')->get();
 
-        return view('game.classic',compact('cards'));
+        return response()->json($cards);
     } 
+
+    public function cardValidator(Request $request){
+        
+    }
+
 }
