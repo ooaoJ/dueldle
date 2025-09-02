@@ -354,7 +354,7 @@
 
             dados.forEach(card => {
                 document.getElementById('suggestions').innerHTML += `
-            <div onclick="validateCard()" class="suggestion-item">
+            <div onclick="validateCard('${card.name}')" class="suggestion-item">
                 <div>${card.name}</div>
                 <img src="{{asset('uploads')}}/${card.image}" alt="">
             </div>
@@ -362,13 +362,31 @@
         `;
             });
 
-            console.log(dados);
         }
 
-        function validateCard() {
-            document.getElementById('suggestions').innerHTML = ''
-            console.log('clicou')
+        
+        async function validateRoute(data) {
+            const api = await fetch('{{route("classic.validate")}}', {
+                'method': 'POST',
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'body': JSON.stringify({
+                    guess_card: data
+                })
+            });
+
+            const response = await api.json();
+
+            return response
         }
+
+        async function validateCard(card) {
+            document.getElementById('suggestions').innerHTML = ''
+            const response = await validateRoute(card)
+            console.log(response)
+        }
+
     </script>
 
 </body>
