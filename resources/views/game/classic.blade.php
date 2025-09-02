@@ -171,7 +171,7 @@
 
         /* --- Grade de Resultados --- */
         .results-grid {
-            width: 100%;
+            width: 130%;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -180,7 +180,7 @@
         .grid-header,
         .grid-row {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
             gap: 10px;
             align-items: center;
             text-align: center;
@@ -314,6 +314,7 @@
         <section id="results-grid" class="results-grid">
             <div class="grid-header">
                 <div>Carta</div>
+                <div>Nome</div>
                 <div>Atributo</div>
                 <div>Tipo card</div>
                 <div>Nível</div>
@@ -321,13 +322,23 @@
                 <div>DEF</div>
             </div>
 
+            <div id="validation">
 
 
+
+            </div>
         </section>
 
     </div>
 
     <script>
+        async function getCardDay() {
+            const api = await fetch('{{route("get.card")}}');
+            const response = await api.json()
+
+            return response
+        }
+
         async function getQueryCards(data) {
             const api = await fetch('{{route("classic.query")}}', {
                 'method': 'POST',
@@ -364,7 +375,7 @@
 
         }
 
-        
+
         async function validateRoute(data) {
             const api = await fetch('{{route("classic.validate")}}', {
                 'method': 'POST',
@@ -384,9 +395,55 @@
         async function validateCard(card) {
             document.getElementById('suggestions').innerHTML = ''
             const response = await validateRoute(card)
-            console.log(response)
+            if (response.status == 'completed') {
+                console.log(11212122121)
+            };
         }
 
+        async function validateCard(card) {
+            document.getElementById('suggestions').innerHTML = ''
+
+            const response = await validateRoute(card)
+
+            if (response.status === 'completed') {
+                console.log("Carta correta!");
+            }
+
+
+            const cardDay = await getCardDay();
+            document.getElementById('validation').innerHTML += `
+            <div class="grid-row incorrect">
+                <img class="card-item"
+                    src="{{asset('uploads')}}/${response.data.image}"
+                    alt="${response.data.name}"
+                    style="width:40px;height:60px;object-fit:cover;margin-right:8px;vertical-align:middle;border-radius:4px;" 
+                >
+                
+
+
+              <div style="color:${response.data.name != cardDay.card.name ? 'red' : 'green'};">
+                        ${response.data.name}
+                </div>
+                
+              <div style="color:${response.data.attribute != cardDay.card.attribute ? 'red' : 'green'};">
+                        ${response.data.attribute}
+                    </div>
+              <div style="color:${response.data.tipe_monster != cardDay.card.tipe_monster ? 'red' : 'green'};">
+                        ${response.data.tipe_monster}
+                    </div>
+                    <div style="color:${response.data.level != cardDay.card.level ? 'red' : 'green'};">
+                        ${response.data.level}
+                    </div>
+                    <div style="color:${response.data.atk != cardDay.card.atk ? 'red' : 'green'};">
+                        ${response.data.atk}
+                    </div>
+                    <div style="color:${response.data.def != cardDay.card.def ? 'red' : 'green'};">
+                        ${response.data.def}
+                    </div>
+
+            </div>
+        `
+        }
     </script>
 
 </body>

@@ -176,6 +176,7 @@
                 <li><a href="{{route('view.cards')}}">Cards View</a></li>
                 <li><a href="{{route('personagens.index')}}">Personagens CRUD</a></li>
                 <li><a href="{{route('view.personagens')}}">Personagens View</a></li>
+                <li><a href="{{route('classic')}}">Game</a></li>
 
                 <li><a href="#">Falas</a></li>
             </ul>
