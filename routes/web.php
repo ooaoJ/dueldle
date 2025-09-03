@@ -22,8 +22,11 @@ Route::resource('personagens', PersonagenController::class)->middleware('auth');
 
 Route::get('/view/personagens',[PersonagenController::class,'view_personagens'])->name('view.personagens')->middleware('auth');
 
-Route::get('/classic',function(){
+Route::get('/game/classic',function(){
     $cards = null;
     return view('game.classic',compact('cards'));
 })->name('classic');
 
+Route::get('/game', function() {
+    return view('layouts.app-game');
+});

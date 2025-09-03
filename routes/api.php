@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClassicModeController;
@@ -28,3 +29,5 @@ Route::get('/get/cards',function(){
     )->first()]);
 
 })->name('get.card');
+
+Route::get('/cards',[CardController::class,'get_all']);

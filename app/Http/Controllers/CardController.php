@@ -14,6 +14,13 @@ class CardController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function get_all(Request $request){
+        $cards = Card::paginate();
+
+        return response()->json($cards);
+    }
+
     public function index(Request $request): View
     {
         $cards = Card::paginate();
