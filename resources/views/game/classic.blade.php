@@ -180,7 +180,7 @@
         .grid-header,
         .grid-row {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
             gap: 10px;
             align-items: center;
             text-align: center;
@@ -320,6 +320,8 @@
                 <div>Nível</div>
                 <div>ATK</div>
                 <div>DEF</div>
+                <div>Tipe Monster Card</div>
+                <div>Tipe Efect</div>
             </div>
 
             <div id="validation">
@@ -426,20 +428,26 @@
                 </div>
                 
               <div style="color:${response.data.attribute != cardDay.card.attribute ? 'red' : 'green'};">
-                        ${response.data.attribute}
+                        ${response.data.attribute  == null ? 'does not have':response.data.attribute}
                     </div>
               <div style="color:${response.data.tipe_monster != cardDay.card.tipe_monster ? 'red' : 'green'};">
-                        ${response.data.tipe_monster}
+                        ${response.data.tipe_monster  == null ? 'does not have':response.data.tipr_monster}
                     </div>
                     <div style="color:${response.data.level != cardDay.card.level ? 'red' : 'green'};">
-                        ${response.data.level}
+                        ${response.data.level == null ? 'does not have':response.data.level}
                     </div>
                     <div style="color:${response.data.atk != cardDay.card.atk ? 'red' : 'green'};">
-                        ${response.data.atk}
+                        ${response.data.atk  == null ? 'does not have':response.data.atk }
                     </div>
                     <div style="color:${response.data.def != cardDay.card.def ? 'red' : 'green'};">
-                        ${response.data.def}
+                        ${response.data.def  == null ? 'does not have':response.data.def}
                     </div>
+                     <div style="color:${response.data.tipe_monster_card != cardDay.card.tipe_monster_card ? 'red' : 'green'};">
+                        ${response.data.tipe_monster_card  == null ? 'does not have':response.data.tipe_monster_card}
+                </div>
+                 <div style="color:${response.data.tipe_efect != cardDay.card.tipe_efect ? 'red' : 'green'};">
+                        ${response.data.tipe_efect  == null ? 'does not have':response.data.tipe_efect}
+                </div>
 
             </div>
         `
