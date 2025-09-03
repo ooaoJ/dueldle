@@ -31,3 +31,5 @@ Route::get('/get/cards',function(){
 })->name('get.card');
 
 Route::get('/cards',[CardController::class,'get_all']);
+
+Route::post('/limiter-day',[ClassicModeController::class,'rateLimiter']);
