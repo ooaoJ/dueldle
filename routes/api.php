@@ -32,4 +32,4 @@ Route::get('/get/cards',function(){
 
 Route::get('/cards',[CardController::class,'get_all']);
 
-Route::post('/limiter-day',[ClassicModeController::class,'rateLimiter']);
+Route::post('/limiter-day',[ClassicModeController::class,'rateLimiter'])->name('putLimiter');

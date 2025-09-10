@@ -22,11 +22,8 @@ Route::resource('personagens', PersonagenController::class)->middleware('auth');
 
 Route::get('/view/personagens',[PersonagenController::class,'view_personagens'])->name('view.personagens')->middleware('auth');
 
-Route::get('/game/classic',function(){
-    $cards = null;
-    return view('game.classic',compact('cards'));
-})->name('classic');
+Route::get('/game/classic',[ClassicModeController::class,'viewGame'])->name('classic');
 
-Route::get('/game', function() {
-    return view('layouts.app-game');
-});
+Route::get('/game', function() { return view('layouts.app-game'); });
+
+Route::get('/test',[ClassicModeController::class,'putLimiter']);

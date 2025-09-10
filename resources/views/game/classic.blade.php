@@ -37,6 +37,25 @@
             box-sizing: border-box;
         }
 
+        .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
         body {
             font-family: 'Roboto', sans-serif;
             background-color: var(--light-bg);
@@ -288,6 +307,11 @@
 </head>
 
 <body>
+
+    @if (Cache::get($ip))
+        <h1>Modo concluido!!</h1>
+    @else
+
     <div class="game-container">
 
         <header>
@@ -364,7 +388,7 @@
 
         async function insertData(data) {
             const dados = await getQueryCards(data);
-
+            console.log(dados);
             dados.forEach(card => {
                 document.getElementById('suggestions').innerHTML += `
             <div onclick="validateCard('${card.name}')" class="suggestion-item">
@@ -402,13 +426,22 @@
             };
         }
 
+        async function putLimiter() {
+            const api = await fetch("{{route('putLimiter')}}",{
+                    'method': 'POST'
+                }
+            );
+        }
+
         async function validateCard(card) {
             document.getElementById('suggestions').innerHTML = ''
 
             const response = await validateRoute(card)
 
             if (response.status === 'completed') {
+                location.reload();
                 console.log("Carta correta!");
+                await putLimiter();
             }
 
 
@@ -431,7 +464,7 @@
                         ${response.data.attribute  == null ? 'does not have':response.data.attribute}
                     </div>
               <div style="color:${response.data.tipe_monster != cardDay.card.tipe_monster ? 'red' : 'green'};">
-                        ${response.data.tipe_monster  == null ? 'does not have':response.data.tipr_monster}
+                        ${response.data.tipe_monster  == null ? 'does not have':response.data.tipe_monster}
                     </div>
                     <div style="color:${response.data.level != cardDay.card.level ? 'red' : 'green'};">
                         ${response.data.level == null ? 'does not have':response.data.level}
@@ -452,8 +485,27 @@
             </div>
         `
         }
+     
     </script>
-
+    @endif
+    @if (Cache::get($ip))
+    <script>
+        const colors = ['#ff0', '#f0f', '#0ff', '#0f0', '#f00', '#00f'];
+        const numConfetti = 100;
+    
+        for (let i = 0; i < numConfetti; i++) {
+          const confetti = document.createElement('div');
+          confetti.classList.add('confetti');
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+          confetti.style.animationDelay = Math.random() * 5 + 's';
+          confetti.style.width = 5 + Math.random() * 10 + 'px';
+          confetti.style.height = 5 + Math.random() * 10 + 'px';
+          document.body.appendChild(confetti);
+        }
+      </script>
+      @endif
 </body>
 
 </html>

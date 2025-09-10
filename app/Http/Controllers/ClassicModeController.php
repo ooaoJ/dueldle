@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Cache;
 
 class ClassicModeController extends Controller
 {
+    public $ip;
+
+    public function __construct(Request $request){
+        $this->ip = $request->ip();
+    }
+
     public function validateAttempt($ip){
        if(Cache::get($ip)){
             abort(401,'invalid attempt');
@@ -16,16 +22,22 @@ class ClassicModeController extends Controller
 
     public function query(Request $request){
 
-        $this->validateAttempt($request->ip());
+        $this->validateAttempt($this->ip);
 
         $cards = Card::where('name','LIKE','%'.$request->input('name').'%')->orderBy('name','ASC')->get();
 
         return response()->json($cards);
     } 
 
+    public function viewGame(){
+        $ip = $this->ip;
+        $cards = null;
+        return view('game.classic',compact('cards','ip'));
+    }
+
     public function cardValidator(Request $request){
 
-        $this->validateAttempt($request->ip());
+        $this->validateAttempt($this->ip);
 
         $card = Cache::remember('card',now()->addDay(1),function(){
             $card = Card::all();
@@ -59,5 +71,4 @@ class ClassicModeController extends Controller
 
         return response()->json(['ip'=>$ip]);
     }   
-
 }
